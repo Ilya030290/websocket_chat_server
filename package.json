@@ -1,0 +1,28 @@
+{
+  "name": "websocket_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Ilya030290",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.6.0",
+    "prettier": "^2.8.3",
+    "sync-dotenv": "^2.7.0"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.0",
+    "socket.io": "^4.5.4",
+    "validator": "^13.7.0"
+  }
+}
