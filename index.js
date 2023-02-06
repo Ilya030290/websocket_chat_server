@@ -82,6 +82,14 @@ io.on('connection', (socket) => {
     });
   });
 
+  socket.on('delete-chat', (chat_id) => {
+    Chat.findByIdAndRemove(chat_id).then(() => {
+      Chat.find().then((result) => {
+        socket.emit('output-chats', result);
+      });
+    });
+  });
+
   socket.on('disconnect', () => {
     const user = removeUser(socket.id);
   });
