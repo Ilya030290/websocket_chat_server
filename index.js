@@ -14,7 +14,12 @@ const app = express();
 
 const server = http.createServer(app);
 
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT'],
+  },
+});
 
 app.use(express.json());
 
@@ -28,11 +33,8 @@ getConnectionToMongoDB();
 
 app.use(authRouter);
 
-app.get('/', (req, res) => {
-  res.send('Hello I am websocket server');
-});
-
 io.on('connection', (socket) => {
+  console.log(`socket ${socket.id} connected`);
   Chat.find().then((result) => {
     socket.emit('output-chats', result);
   });
@@ -81,10 +83,10 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    removeUser(socket.id);
+    const user = removeUser(socket.id);
   });
 });
 
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
   console.log(`Server start on port: ${process.env.PORT}`);
 });
